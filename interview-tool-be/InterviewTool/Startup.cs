@@ -1,3 +1,5 @@
+using InterviewTool.Application;
+using InterviewTool.Infrastructure;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -18,8 +20,11 @@ namespace InterviewTool
 
         public void ConfigureServices(IServiceCollection services)
         {
-
             services.AddControllers();
+
+            services.AddApplication();
+            services.AddInfrastructure();
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "InterviewTool", Version = "v1" });

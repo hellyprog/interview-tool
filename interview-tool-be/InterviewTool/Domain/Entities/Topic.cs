@@ -1,4 +1,4 @@
-﻿namespace InterviewTool.Entities
+﻿namespace InterviewTool.Domain.Entities
 {
     public class Topic
     {

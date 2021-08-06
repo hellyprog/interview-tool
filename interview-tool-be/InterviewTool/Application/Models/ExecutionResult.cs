@@ -1,4 +1,4 @@
-﻿namespace InterviewTool.Models
+﻿namespace InterviewTool.Application.Models
 {
     public class ExecutionResult
     {
