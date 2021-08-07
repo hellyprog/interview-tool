@@ -1,12 +1,20 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using MediatR;
+using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
 namespace InterviewTool.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ChapterController : ControllerBase
+    public class ChapterController : BaseApplicationController
     {
+        private readonly IMediator _mediator;
+
+        public ChapterController(IMediator mediator)
+        {
+            _mediator = mediator;
+        }
+
         [HttpGet]
         public async Task<IActionResult> GetChapters()
         {

@@ -1,4 +1,4 @@
-﻿using InterviewTool.Application.Interfaces;
+﻿using InterviewTool.Application.DataServices.Interfaces;
 using InterviewTool.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;

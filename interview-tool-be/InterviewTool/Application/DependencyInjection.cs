@@ -1,8 +1,6 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using MediatR;
+using Microsoft.Extensions.DependencyInjection;
+using System.Reflection;
 
 namespace InterviewTool.Application
 {
@@ -10,7 +8,7 @@ namespace InterviewTool.Application
     {
         public static void AddApplication(this IServiceCollection services)
         {
-
+            services.AddMediatR(Assembly.GetExecutingAssembly());
         }
     }
 }

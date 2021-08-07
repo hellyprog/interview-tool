@@ -1,7 +1,7 @@
 ﻿using InterviewTool.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace InterviewTool.Application.Interfaces
+namespace InterviewTool.Application.DataServices.Interfaces
 {
     public interface IApplicationDbContext
     {

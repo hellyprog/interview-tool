@@ -1,11 +1,13 @@
 using InterviewTool.Application;
 using InterviewTool.Infrastructure;
+using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using System.Reflection;
 
 namespace InterviewTool
 {
@@ -22,8 +24,10 @@ namespace InterviewTool
         {
             services.AddControllers();
 
+            services.AddMediatR(Assembly.GetExecutingAssembly());
+
             services.AddApplication();
-            services.AddInfrastructure();
+            services.AddInfrastructure(Configuration);
 
             services.AddSwaggerGen(c =>
             {
