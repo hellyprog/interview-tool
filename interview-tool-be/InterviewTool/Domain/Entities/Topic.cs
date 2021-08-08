@@ -5,6 +5,7 @@
         public int TopicId { get; set; }
         public string Name { get; set; }
         public double Weight { get; set; }
+        public int ChapterId { get; set; }
         public Chapter Chapter { get; set; }
     }
 }

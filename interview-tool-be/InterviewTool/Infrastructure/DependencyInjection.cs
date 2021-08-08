@@ -1,8 +1,9 @@
-﻿using InterviewTool.Application.DataServices.Interfaces;
-using InterviewTool.Infrastructure.Persistence;
+﻿using InterviewTool.Infrastructure.Persistence;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
+using InterviewTool.Infrastructure.Persistence.Repositories;
+using InterviewTool.Domain.Repositories;
 
 namespace InterviewTool.Infrastructure
 {
@@ -14,7 +15,7 @@ namespace InterviewTool.Infrastructure
                 options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"),
                 b => b.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName)));
 
-            services.AddScoped<IApplicationDbContext>(provider => provider.GetService<ApplicationDbContext>());
+            services.AddTransient<IChapterRepository, ChapterRepository>();
         }
     }
 }

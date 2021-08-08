@@ -1,4 +1,6 @@
-﻿using MediatR;
+﻿using InterviewTool.Application.Commands;
+using MediatR;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
@@ -28,9 +30,12 @@ namespace InterviewTool.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateChapter()
+        public async Task<IActionResult> CreateChapter(CreateChapterCommand command)
         {
-            return default;
+            var result = await _mediator.Send(command);
+            var statusCode = result.Success ? StatusCodes.Status201Created : StatusCodes.Status400BadRequest;
+
+            return StatusCode(statusCode, result);
         }
 
         [HttpPut]

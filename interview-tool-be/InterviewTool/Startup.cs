@@ -24,8 +24,6 @@ namespace InterviewTool
         {
             services.AddControllers();
 
-            services.AddMediatR(Assembly.GetExecutingAssembly());
-
             services.AddApplication();
             services.AddInfrastructure(Configuration);
 
