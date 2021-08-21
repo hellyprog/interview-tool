@@ -1,5 +1,6 @@
 ﻿using InterviewTool.Application.Commands;
 using InterviewTool.Application.Models;
+using InterviewTool.Domain.Repositories;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -12,9 +13,19 @@ namespace InterviewTool.Application.CommandHandlers
     public class ChapterCommandHandler :
         IRequestHandler<CreateChapterCommand, ExecutionResult>
     {
-        public Task<ExecutionResult> Handle(CreateChapterCommand request, CancellationToken cancellationToken)
+        private readonly IUnitOfWork _uow;
+
+        public ChapterCommandHandler(IUnitOfWork uow)
         {
-            throw new NotImplementedException();
+            _uow = uow;
+        }
+
+        public async Task<ExecutionResult> Handle(CreateChapterCommand request, CancellationToken cancellationToken)
+        {
+            _uow.ChapterRepository.Insert(new Domain.Entities.Chapter { Name = request.Name, Weight = request.Weight });
+            var result = await _uow.SaveAsync();
+
+            return result > 0 ? ExecutionResult.FromSuccess() : ExecutionResult.FromFailure("Error saving chapter");
         }
     }
 }
