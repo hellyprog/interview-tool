@@ -1,9 +1,9 @@
-﻿using InterviewTool.Infrastructure.Persistence;
+﻿using InterviewTool.Domain.Repositories;
+using InterviewTool.Infrastructure.Persistence;
+using InterviewTool.Infrastructure.Persistence.Repositories;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.EntityFrameworkCore;
-using InterviewTool.Infrastructure.Persistence.Repositories;
-using InterviewTool.Domain.Repositories;
 
 namespace InterviewTool.Infrastructure
 {

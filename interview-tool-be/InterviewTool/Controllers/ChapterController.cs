@@ -30,7 +30,7 @@ namespace InterviewTool.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateChapter(CreateChapterCommand command)
+        public async Task<IActionResult> CreateChapter([FromBody] CreateChapterCommand command)
         {
             var result = await _mediator.Send(command);
             var statusCode = result.Success ? StatusCodes.Status201Created : StatusCodes.Status400BadRequest;

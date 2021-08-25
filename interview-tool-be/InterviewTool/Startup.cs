@@ -1,8 +1,10 @@
+using FluentValidation.AspNetCore;
 using InterviewTool.Application;
+using InterviewTool.Filters;
 using InterviewTool.Infrastructure;
-using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -22,7 +24,20 @@ namespace InterviewTool
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
+            services.AddControllers(options =>
+            {
+                options.Filters.Add(typeof(ModelStateValidationFilter));
+            })
+            .AddFluentValidation(fv =>
+            {
+                fv.RegisterValidatorsFromAssembly(Assembly.GetExecutingAssembly());
+                fv.ImplicitlyValidateChildProperties = true;
+            }); ;
+
+            services.Configure<ApiBehaviorOptions>(options =>
+            {
+                options.SuppressModelStateInvalidFilter = true;
+            });
 
             services.AddApplication();
             services.AddInfrastructure(Configuration);
