@@ -1,4 +1,5 @@
 ﻿using InterviewTool.Application.Commands;
+using InterviewTool.Application.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -20,6 +21,7 @@ namespace InterviewTool.Controllers
         [HttpGet]
         public async Task<IActionResult> GetChapters()
         {
+            var result = await _mediator.Send(new GetChaptersQuery());
             return default;
         }
 
