@@ -22,13 +22,18 @@ namespace InterviewTool.Controllers
         public async Task<IActionResult> GetChapters()
         {
             var result = await _mediator.Send(new GetChaptersQuery());
-            return default;
+            var statusCode = result.Success ? StatusCodes.Status200OK : StatusCodes.Status400BadRequest;
+
+            return StatusCode(statusCode, result);
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetChapter(int id)
+        public async Task<IActionResult> GetChapter(int chapterId)
         {
-            return default;
+            var result = await _mediator.Send(new GetChapterQuery { ChapterId = chapterId });
+            var statusCode = result.Success ? StatusCodes.Status200OK : StatusCodes.Status400BadRequest;
+
+            return StatusCode(statusCode, result);
         }
 
         [HttpPost]
@@ -41,15 +46,21 @@ namespace InterviewTool.Controllers
         }
 
         [HttpPut]
-        public async Task<IActionResult> UpdateChapter()
+        public async Task<IActionResult> UpdateChapter([FromBody] UpdateChapterCommand command)
         {
-            return default;
+            var result = await _mediator.Send(command);
+            var statusCode = result.Success ? StatusCodes.Status200OK : StatusCodes.Status400BadRequest;
+
+            return StatusCode(statusCode, result);
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> RemoveChapter(int id)
+        public async Task<IActionResult> DeleteChapter(int chapterId)
         {
-            return default;
+            var result = await _mediator.Send(new DeleteChapterCommand { ChapterId = chapterId });
+            var statusCode = result.Success ? StatusCodes.Status200OK : StatusCodes.Status400BadRequest;
+
+            return StatusCode(statusCode, result);
         }
     }
 }
