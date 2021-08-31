@@ -3,16 +3,17 @@ using InterviewTool.Application.Models;
 using InterviewTool.Application.Queries;
 using InterviewTool.Domain.Repositories;
 using MediatR;
-using System;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace InterviewTool.Application.QueryHandlers
 {
-    public class ChapterQueryHandler
-        : IRequestHandler<GetChapterQuery, ExecutionResult<ChapterDTO>>
+    public class ChapterQueryHandler : 
+        IRequestHandler<GetChapterQuery, ExecutionResult<ChapterDTO>>,
+        IRequestHandler<GetChaptersQuery, ExecutionResult<List<ChapterDTO>>>
+
     {
         private readonly IUnitOfWork _uow;
 
@@ -21,9 +22,20 @@ namespace InterviewTool.Application.QueryHandlers
             _uow = uow;
         }
 
-        public Task<ExecutionResult<ChapterDTO>> Handle(GetChapterQuery request, CancellationToken cancellationToken)
+        public async Task<ExecutionResult<ChapterDTO>> Handle(GetChapterQuery request, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            var chapter = await _uow.ChapterRepository.GetById(request.ChapterId);
+
+            return chapter != null
+                ? ExecutionResult<ChapterDTO>.FromSuccess(new ChapterDTO()) // Automapper
+                : ExecutionResult<ChapterDTO>.FromFailure("Error getting chapter");
+        }
+
+        public async Task<ExecutionResult<List<ChapterDTO>>> Handle(GetChaptersQuery request, CancellationToken cancellationToken)
+        {
+            var chapters = await _uow.ChapterRepository.GetAll().ToListAsync();
+
+            return ExecutionResult<List<ChapterDTO>>.FromSuccess(new List<ChapterDTO>()); //automapper
         }
     }
 }
