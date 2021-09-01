@@ -1,4 +1,5 @@
-﻿using InterviewTool.Application.DTOs;
+﻿using AutoMapper;
+using InterviewTool.Application.DTOs;
 using InterviewTool.Application.Models;
 using InterviewTool.Application.Queries;
 using InterviewTool.Domain.Repositories;
@@ -16,10 +17,12 @@ namespace InterviewTool.Application.QueryHandlers
 
     {
         private readonly IUnitOfWork _uow;
+        private readonly IMapper _mapper;
 
-        public ChapterQueryHandler(IUnitOfWork uow)
+        public ChapterQueryHandler(IUnitOfWork uow, IMapper mapper)
         {
             _uow = uow;
+            _mapper = mapper;
         }
 
         public async Task<ExecutionResult<ChapterDTO>> Handle(GetChapterQuery request, CancellationToken cancellationToken)
@@ -27,7 +30,7 @@ namespace InterviewTool.Application.QueryHandlers
             var chapter = await _uow.ChapterRepository.GetById(request.ChapterId);
 
             return chapter != null
-                ? ExecutionResult<ChapterDTO>.FromSuccess(new ChapterDTO()) // Automapper
+                ? ExecutionResult<ChapterDTO>.FromSuccess(_mapper.Map<ChapterDTO>(chapter))
                 : ExecutionResult<ChapterDTO>.FromFailure("Error getting chapter");
         }
 
@@ -35,7 +38,7 @@ namespace InterviewTool.Application.QueryHandlers
         {
             var chapters = await _uow.ChapterRepository.GetAll().ToListAsync();
 
-            return ExecutionResult<List<ChapterDTO>>.FromSuccess(new List<ChapterDTO>()); //automapper
+            return ExecutionResult<List<ChapterDTO>>.FromSuccess(_mapper.Map<List<ChapterDTO>>(chapters));
         }
     }
 }
