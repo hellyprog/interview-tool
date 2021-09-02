@@ -1,5 +1,6 @@
 ﻿using InterviewTool.Application.Commands;
 using InterviewTool.Application.Models;
+using InterviewTool.Domain.Entities;
 using InterviewTool.Domain.Repositories;
 using MediatR;
 using System.Threading;
@@ -8,7 +9,9 @@ using System.Threading.Tasks;
 namespace InterviewTool.Application.CommandHandlers
 {
     public class ChapterCommandHandler :
-        IRequestHandler<CreateChapterCommand, ExecutionResult>
+        IRequestHandler<CreateChapterCommand, ExecutionResult>,
+        IRequestHandler<UpdateChapterCommand, ExecutionResult>,
+        IRequestHandler<DeleteChapterCommand, ExecutionResult>
     {
         private readonly IUnitOfWork _uow;
 
@@ -19,10 +22,24 @@ namespace InterviewTool.Application.CommandHandlers
 
         public async Task<ExecutionResult> Handle(CreateChapterCommand request, CancellationToken cancellationToken)
         {
-            _uow.ChapterRepository.Insert(new Domain.Entities.Chapter { Name = request.Name, Weight = request.Weight });
+            var chapterToInsert = new Chapter(request.Name, request.Weight);
+            _uow.ChapterRepository.Insert(chapterToInsert);
             var result = await _uow.SaveAsync();
 
             return result > 0 ? ExecutionResult.FromSuccess() : ExecutionResult.FromFailure("Error saving chapter");
+        }
+
+        public Task<ExecutionResult> Handle(UpdateChapterCommand request, CancellationToken cancellationToken)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public async Task<ExecutionResult> Handle(DeleteChapterCommand request, CancellationToken cancellationToken)
+        {
+            await _uow.ChapterRepository.DeleteById(request.ChapterId);
+            var result = await _uow.SaveAsync();
+
+            return result > 0 ? ExecutionResult.FromSuccess() : ExecutionResult.FromFailure("Error deleting chapter");
         }
     }
 }
