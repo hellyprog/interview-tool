@@ -7,10 +7,10 @@ namespace InterviewTool.Domain.Repositories
     public interface IRepository<T> where T : class
     {
         IQueryable<T> GetAll();
-        Task<T> GetById<K>(K id);
+        Task<T> GetByIdAsync<K>(K id);
         void Insert(T entity);
         void Insert(ICollection<T> entities);
         void Update(T entity);
-        Task DeleteById<K>(K id);
+        Task DeleteByIdAsync<K>(K id);
     }
 }

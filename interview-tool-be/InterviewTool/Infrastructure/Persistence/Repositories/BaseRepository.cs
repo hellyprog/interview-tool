@@ -14,7 +14,7 @@ namespace InterviewTool.Infrastructure.Persistence.Repositories
             _context = context;
         }
 
-        public async Task DeleteById<K>(K id)
+        public async Task DeleteByIdAsync<K>(K id)
         {
             var entityToDelete = await _context.Set<T>().FindAsync(id);
             _context.Remove(entityToDelete);
@@ -25,7 +25,7 @@ namespace InterviewTool.Infrastructure.Persistence.Repositories
             return _context.Set<T>().AsQueryable();
         }
 
-        public Task<T> GetById<K>(K id)
+        public Task<T> GetByIdAsync<K>(K id)
         {
             return _context.Set<T>().FindAsync(id).AsTask();
         }

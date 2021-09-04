@@ -27,7 +27,7 @@ namespace InterviewTool.Application.QueryHandlers
 
         public async Task<ExecutionResult<ChapterDTO>> Handle(GetChapterQuery request, CancellationToken cancellationToken)
         {
-            var chapter = await _uow.ChapterRepository.GetById(request.ChapterId);
+            var chapter = await _uow.ChapterRepository.GetByIdAsync(request.ChapterId);
 
             return chapter != null
                 ? ExecutionResult<ChapterDTO>.FromSuccess(_mapper.Map<ChapterDTO>(chapter))

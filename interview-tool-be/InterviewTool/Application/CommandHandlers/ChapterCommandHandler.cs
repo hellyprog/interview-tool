@@ -29,14 +29,19 @@ namespace InterviewTool.Application.CommandHandlers
             return result > 0 ? ExecutionResult.FromSuccess() : ExecutionResult.FromFailure("Error saving chapter");
         }
 
-        public Task<ExecutionResult> Handle(UpdateChapterCommand request, CancellationToken cancellationToken)
+        public async Task<ExecutionResult> Handle(UpdateChapterCommand request, CancellationToken cancellationToken)
         {
-            throw new System.NotImplementedException();
+            var chapterToUpdate = await _uow.ChapterRepository.GetByIdAsync(request.ChapterId);
+            chapterToUpdate.UpdateName(request.Name);
+            chapterToUpdate.UpdateWeight(request.Weight);
+            var result = await _uow.SaveAsync();
+
+            return result > 0 ? ExecutionResult.FromSuccess() : ExecutionResult.FromFailure("Error updating chapter");
         }
 
         public async Task<ExecutionResult> Handle(DeleteChapterCommand request, CancellationToken cancellationToken)
         {
-            await _uow.ChapterRepository.DeleteById(request.ChapterId);
+            await _uow.ChapterRepository.DeleteByIdAsync(request.ChapterId);
             var result = await _uow.SaveAsync();
 
             return result > 0 ? ExecutionResult.FromSuccess() : ExecutionResult.FromFailure("Error deleting chapter");
