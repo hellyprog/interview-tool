@@ -10,6 +10,7 @@ namespace InterviewTool.Application
         public static void AddApplication(this IServiceCollection services)
         {
             services.AddMediatR(Assembly.GetExecutingAssembly());
+            services.AddSingleton(GetMapper());
         }
 
         private static IMapper GetMapper()
