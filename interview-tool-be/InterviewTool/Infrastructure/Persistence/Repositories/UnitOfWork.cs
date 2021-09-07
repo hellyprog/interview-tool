@@ -8,6 +8,7 @@ namespace InterviewTool.Infrastructure.Persistence.Repositories
     {
         private readonly ApplicationDbContext _context;
         private readonly IChapterRepository _chapterRepository;
+        private readonly ITopicRepository _topicRepository;
 
         public UnitOfWork(ApplicationDbContext context)
         {
@@ -15,6 +16,8 @@ namespace InterviewTool.Infrastructure.Persistence.Repositories
         }
 
         public IChapterRepository ChapterRepository => _chapterRepository ?? new ChapterRepository(_context);
+
+        public ITopicRepository TopicRepository => _topicRepository ?? new TopicRepository(_context);
 
         public Task<int> SaveAsync()
         {

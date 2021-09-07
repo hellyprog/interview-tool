@@ -6,5 +6,6 @@ namespace InterviewTool.Domain.Repositories
     {
         Task<int> SaveAsync();
         IChapterRepository ChapterRepository { get; }
+        ITopicRepository TopicRepository { get; }
     }
 }
