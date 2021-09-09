@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace InterviewTool.Application.QueryHandlers
 {
-    public class ChapterQueryHandler : 
+    public class ChapterQueryHandler :
         IRequestHandler<GetChapterQuery, ExecutionResult<ChapterDTO>>,
         IRequestHandler<GetChaptersQuery, ExecutionResult<List<ChapterDTO>>>
 
