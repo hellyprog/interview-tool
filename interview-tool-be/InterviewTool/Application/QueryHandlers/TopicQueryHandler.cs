@@ -4,6 +4,7 @@ using InterviewTool.Application.Models;
 using InterviewTool.Application.Queries;
 using InterviewTool.Domain.Repositories;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
@@ -23,14 +24,20 @@ namespace InterviewTool.Application.QueryHandlers
             _mapper = mapper;
         }
 
-        public Task<ExecutionResult<TopicDTO>> Handle(GetTopicQuery request, CancellationToken cancellationToken)
+        public async Task<ExecutionResult<TopicDTO>> Handle(GetTopicQuery request, CancellationToken cancellationToken)
         {
-            throw new System.NotImplementedException();
+            var topic = await _uow.TopicRepository.GetByIdAsync(request.TopicId);
+
+            return topic != null
+                ? ExecutionResult<TopicDTO>.FromSuccess(_mapper.Map<TopicDTO>(topic))
+                : ExecutionResult<TopicDTO>.FromFailure("Error getting topic");
         }
 
-        public Task<ExecutionResult<List<TopicDTO>>> Handle(GetTopicsQuery request, CancellationToken cancellationToken)
+        public async Task<ExecutionResult<List<TopicDTO>>> Handle(GetTopicsQuery request, CancellationToken cancellationToken)
         {
-            throw new System.NotImplementedException();
+            var topics = await _uow.TopicRepository.GetAll().ToListAsync();
+
+            return ExecutionResult<List<TopicDTO>>.FromSuccess(_mapper.Map<List<TopicDTO>>(topics));
         }
     }
 }
