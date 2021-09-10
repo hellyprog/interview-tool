@@ -4,7 +4,8 @@ using MediatR;
 
 namespace InterviewTool.Application.Queries
 {
-    public class GetTopicQuery : IRequest<ExecutionResult<ChapterDTO>>
+    public class GetTopicQuery : IRequest<ExecutionResult<TopicDTO>>
     {
+        public int TopicId { get; set; }
     }
 }
