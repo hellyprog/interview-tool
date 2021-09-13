@@ -17,10 +17,10 @@ namespace InterviewTool.Domain.Entities
             Weight = weight;
         }
 
-        public void Update(Chapter updated)
+        public void Update(string name, double weight)
         {
-            Name = updated.Name;
-            Weight = updated.Weight;
+            Name = name;
+            Weight = weight;
         }
 
         public void UpdateName(string name)

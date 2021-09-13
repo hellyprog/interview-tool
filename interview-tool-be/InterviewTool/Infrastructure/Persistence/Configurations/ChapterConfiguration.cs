@@ -16,7 +16,8 @@ namespace InterviewTool.Infrastructure.Persistence.Configurations
             builder.Property(c => c.Weight).HasColumnName("weight").IsRequired();
 
             builder.HasMany(c => c.Topics)
-                .WithOne(t => t.Chapter);
+                .WithOne(t => t.Chapter)
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }
