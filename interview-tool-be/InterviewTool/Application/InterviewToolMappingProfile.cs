@@ -9,6 +9,10 @@ namespace InterviewTool.Application
         public InterviewToolMappingProfile()
         {
             CreateMap<Chapter, ChapterDTO>();
+            CreateMap<Topic, TopicDTO>();
+            CreateMap<TopicResult, TopicResultDTO>();
+            CreateMap<ChapterResult, ChapterResultDTO>();
+            CreateMap<Interview, InterviewDTO>();
         }
     }
 }
