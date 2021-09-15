@@ -21,4 +21,13 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Application\Commands\ChapterResult\" />
+    <Folder Include="Application\Commands\Interview\" />
+    <Folder Include="Application\Commands\TopicResult\" />
+    <Folder Include="Application\Queries\ChapterResult\" />
+    <Folder Include="Application\Queries\Interview\" />
+    <Folder Include="Application\Queries\TopicResult\" />
+  </ItemGroup>
+
 </Project>
