@@ -14,11 +14,16 @@ namespace InterviewTool.Infrastructure.Persistence.Configurations
             builder.Property(t => t.TopicId).HasColumnName("topic_id").IsRequired();
             builder.Property(t => t.Name).HasColumnName("name").IsRequired();
             builder.Property(t => t.Weight).HasColumnName("weight").IsRequired();
-
             builder.Property(t => t.ChapterId).HasColumnName("chapter_id").IsRequired();
+
             builder.HasOne(t => t.Chapter)
                 .WithMany(t => t.Topics)
                 .HasForeignKey(t => t.ChapterId);
+
+            builder.HasMany(x => x.TopicResults)
+                .WithOne(x => x.Topic)
+                .HasForeignKey(x => x.TopicId)
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

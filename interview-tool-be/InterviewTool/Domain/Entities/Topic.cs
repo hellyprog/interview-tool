@@ -1,4 +1,6 @@
-﻿namespace InterviewTool.Domain.Entities
+﻿using System.Collections.Generic;
+
+namespace InterviewTool.Domain.Entities
 {
     public class Topic
     {
@@ -7,6 +9,7 @@
         public double Weight { get; private set; }
         public int ChapterId { get; private set; }
         public Chapter Chapter { get; private set; }
+        public List<TopicResult> TopicResults { get; set; }
 
         private Topic() { }
 

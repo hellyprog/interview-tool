@@ -8,6 +8,7 @@ namespace InterviewTool.Domain.Entities
         public string Name { get; private set; }
         public double Weight { get; private set; }
         public List<Topic> Topics { get; private set; }
+        public List<ChapterResult> ChapterResults { get; set; }
 
         private Chapter() { }
 

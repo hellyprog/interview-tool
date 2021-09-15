@@ -18,6 +18,11 @@ namespace InterviewTool.Infrastructure.Persistence.Configurations
             builder.HasMany(c => c.Topics)
                 .WithOne(t => t.Chapter)
                 .OnDelete(DeleteBehavior.Cascade);
+
+            builder.HasMany(x => x.ChapterResults)
+                .WithOne(x => x.Chapter)
+                .HasForeignKey(x => x.ChapterId)
+                .OnDelete(DeleteBehavior.SetNull);
         }
     }
 }

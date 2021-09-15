@@ -6,7 +6,7 @@ namespace InterviewTool.Domain.Entities
     {
         public int ChapterResultId { get; set; }
         public double Point { get; set; }
-        public int ChapterId { get; set; }
+        public int? ChapterId { get; set; }
         public int InterviewId { get; set; }
         public Chapter Chapter { get; set; }
         public Interview Interview { get; set; }
