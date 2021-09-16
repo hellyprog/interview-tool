@@ -13,7 +13,7 @@ namespace InterviewTool.Application.QueryHandlers
 {
     public class ChapterQueryHandler :
         IRequestHandler<GetChapterQuery, ExecutionResult<ChapterDTO>>,
-        IRequestHandler<GetChapterResultsQuery, ExecutionResult<List<ChapterDTO>>>
+        IRequestHandler<GetChaptersQuery, ExecutionResult<List<ChapterDTO>>>
 
     {
         private readonly IUnitOfWork _uow;
@@ -34,7 +34,7 @@ namespace InterviewTool.Application.QueryHandlers
                 : ExecutionResult<ChapterDTO>.FromFailure("Error getting chapter");
         }
 
-        public async Task<ExecutionResult<List<ChapterDTO>>> Handle(GetChapterResultsQuery request, CancellationToken cancellationToken)
+        public async Task<ExecutionResult<List<ChapterDTO>>> Handle(GetChaptersQuery request, CancellationToken cancellationToken)
         {
             var chapters = await _uow.ChapterRepository.GetAll().ToListAsync();
 

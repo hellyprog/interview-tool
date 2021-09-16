@@ -2,7 +2,7 @@
 
 namespace InterviewTool.Domain.Repositories
 {
-    public interface IChapterRepository : IRepository<Chapter>
+    public interface ITopicResultRepository : IRepository<TopicResult>
     {
     }
 }
