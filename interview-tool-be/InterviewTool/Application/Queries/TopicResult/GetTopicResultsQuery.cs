@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace InterviewTool.Application.Queries
 {
-    public class GetChapterResultsQuery : IRequest<ExecutionResult<List<ChapterDTO>>>
+    public class GetTopicResultsQuery : IRequest<ExecutionResult<List<TopicResultDTO>>>
     {
     }
 }

@@ -21,7 +21,7 @@ namespace InterviewTool.Controllers
         [HttpGet]
         public async Task<IActionResult> GetChapters()
         {
-            var result = await _mediator.Send(new GetChaptersQuery());
+            var result = await _mediator.Send(new GetChapterResultsQuery());
             var statusCode = result.Success ? StatusCodes.Status200OK : StatusCodes.Status400BadRequest;
 
             return StatusCode(statusCode, result);
