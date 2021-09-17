@@ -27,15 +27,6 @@ namespace InterviewTool.Controllers
             return StatusCode(statusCode, result);
         }
 
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetTopic(int topicId)
-        {
-            var result = await _mediator.Send(new GetTopicQuery { TopicId = topicId });
-            var statusCode = result.Success ? StatusCodes.Status200OK : StatusCodes.Status400BadRequest;
-
-            return StatusCode(statusCode, result);
-        }
-
         [HttpPost]
         public async Task<IActionResult> CreateTopic([FromBody] CreateTopicCommand command)
         {

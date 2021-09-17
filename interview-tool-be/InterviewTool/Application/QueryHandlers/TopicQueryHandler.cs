@@ -12,7 +12,6 @@ using System.Threading.Tasks;
 namespace InterviewTool.Application.QueryHandlers
 {
     public class TopicQueryHandler :
-        IRequestHandler<GetTopicQuery, ExecutionResult<TopicDTO>>,
         IRequestHandler<GetTopicsQuery, ExecutionResult<List<TopicDTO>>>
     {
         private readonly IUnitOfWork _uow;
@@ -22,15 +21,6 @@ namespace InterviewTool.Application.QueryHandlers
         {
             _uow = uow;
             _mapper = mapper;
-        }
-
-        public async Task<ExecutionResult<TopicDTO>> Handle(GetTopicQuery request, CancellationToken cancellationToken)
-        {
-            var topic = await _uow.TopicRepository.GetByIdAsync(request.TopicId);
-
-            return topic != null
-                ? ExecutionResult<TopicDTO>.FromSuccess(_mapper.Map<TopicDTO>(topic))
-                : ExecutionResult<TopicDTO>.FromFailure("Error getting topic");
         }
 
         public async Task<ExecutionResult<List<TopicDTO>>> Handle(GetTopicsQuery request, CancellationToken cancellationToken)

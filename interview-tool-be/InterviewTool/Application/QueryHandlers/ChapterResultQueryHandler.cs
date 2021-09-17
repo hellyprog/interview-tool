@@ -1,26 +1,34 @@
-﻿using InterviewTool.Application.DTOs;
+﻿using AutoMapper;
+using InterviewTool.Application.DTOs;
 using InterviewTool.Application.Models;
 using InterviewTool.Application.Queries;
+using InterviewTool.Domain.Repositories;
 using MediatR;
-using System;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace InterviewTool.Application.QueryHandlers
 {
     public class ChapterResultQueryHandler :
-        IRequestHandler<GetChapterResultQuery, ExecutionResult<ChapterResultDTO>>,
         IRequestHandler<GetChapterResultsQuery, ExecutionResult<List<ChapterResultDTO>>>
     {
-        public Task<ExecutionResult<ChapterResultDTO>> Handle(GetChapterResultQuery request, CancellationToken cancellationToken)
+        private readonly IUnitOfWork _uow;
+        private readonly IMapper _mapper;
+
+        public ChapterResultQueryHandler(IUnitOfWork uow, IMapper mapper)
         {
-            throw new NotImplementedException();
+            _uow = uow;
+            _mapper = mapper;
         }
 
-        public Task<ExecutionResult<List<ChapterResultDTO>>> Handle(GetChapterResultsQuery request, CancellationToken cancellationToken)
+        public async Task<ExecutionResult<List<ChapterResultDTO>>> Handle(GetChapterResultsQuery request, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            var chapterResults = await _uow.ChapterResultRepository.GetAll().Where(x => x.InterviewId == request.InterviewId).ToListAsync();
+
+            return ExecutionResult<List<ChapterResultDTO>>.FromSuccess(_mapper.Map<List<ChapterResultDTO>>(chapterResults));
         }
     }
 }

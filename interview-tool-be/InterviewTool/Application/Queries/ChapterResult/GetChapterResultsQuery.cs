@@ -7,5 +7,6 @@ namespace InterviewTool.Application.Queries
 {
     public class GetChapterResultsQuery : IRequest<ExecutionResult<List<ChapterResultDTO>>>
     {
+        public int InterviewId { get; set; }
     }
 }
