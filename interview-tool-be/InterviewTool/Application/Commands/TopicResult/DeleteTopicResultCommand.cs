@@ -5,5 +5,6 @@ namespace InterviewTool.Application.Commands
 {
     public class DeleteTopicResultCommand : IRequest<ExecutionResult>
     {
+        public int TopicResultId { get; set; }
     }
 }
