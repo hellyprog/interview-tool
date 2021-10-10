@@ -13,6 +13,7 @@ namespace InterviewTool.Infrastructure.Persistence.Configurations
             builder.HasKey(x => x.InterviewId);
             builder.Property(x => x.InterviewId).HasColumnName("interview_id").IsRequired();
             builder.Property(x => x.CandidateName).HasColumnName("candidate_name").IsRequired();
+            builder.Property(x => x.IsFinished).HasColumnName("is_finished").IsRequired();
 
             builder.HasMany(x => x.ChapterResults)
                 .WithOne(x => x.Interview)

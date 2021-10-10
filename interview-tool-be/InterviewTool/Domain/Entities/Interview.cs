@@ -6,6 +6,12 @@ namespace InterviewTool.Domain.Entities
     {
         public int InterviewId { get; set; }
         public string CandidateName { get; set; }
+        public bool IsFinished { get; set; }
         public List<ChapterResult> ChapterResults { get; set; }
+
+        public Interview(string candidateName)
+        {
+            CandidateName = candidateName;
+        }
     }
 }
