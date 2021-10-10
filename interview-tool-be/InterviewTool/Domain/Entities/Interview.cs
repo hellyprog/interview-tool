@@ -9,9 +9,10 @@ namespace InterviewTool.Domain.Entities
         public bool IsFinished { get; set; }
         public List<ChapterResult> ChapterResults { get; set; }
 
-        public Interview(string candidateName)
+        public Interview(string candidateName, bool isFinished = false)
         {
             CandidateName = candidateName;
+            IsFinished = isFinished;
         }
     }
 }
