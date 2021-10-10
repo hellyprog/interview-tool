@@ -11,5 +11,19 @@ namespace InterviewTool.Domain.Entities
         public Chapter Chapter { get; set; }
         public Interview Interview { get; set; }
         public List<TopicResult> TopicResults { get; set; }
+
+        private ChapterResult() { }
+
+        public ChapterResult(int interviewId, double point, int chapterId)
+        {
+            InterviewId = interviewId;
+            Point = point;
+            ChapterId = chapterId;
+        }
+
+        public void UpdatePoint(int point)
+        {
+            Point = point;
+        }
     }
 }
