@@ -26,7 +26,9 @@ namespace InterviewTool.Application.QueryHandlers
 
         public async Task<ExecutionResult<List<ChapterResultDTO>>> Handle(GetChapterResultsQuery request, CancellationToken cancellationToken)
         {
-            var chapterResults = await _uow.ChapterResultRepository.GetAll().Where(x => x.InterviewId == request.InterviewId).ToListAsync();
+            var chapterResults = await _uow.ChapterResultRepository.GetAll()
+                .Where(x => x.InterviewId == request.InterviewId)
+                .ToListAsync(cancellationToken: cancellationToken);
 
             return ExecutionResult<List<ChapterResultDTO>>.FromSuccess(_mapper.Map<List<ChapterResultDTO>>(chapterResults));
         }

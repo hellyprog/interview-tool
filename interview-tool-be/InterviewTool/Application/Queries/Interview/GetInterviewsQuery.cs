@@ -7,5 +7,6 @@ namespace InterviewTool.Application.Queries
 {
     public class GetInterviewsQuery : IRequest<ExecutionResult<List<InterviewDTO>>>
     {
+        public bool? IsFinished { get; set; }
     }
 }
