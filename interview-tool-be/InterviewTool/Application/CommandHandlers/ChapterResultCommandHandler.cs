@@ -1,5 +1,7 @@
 ﻿using InterviewTool.Application.Commands;
 using InterviewTool.Application.Models;
+using InterviewTool.Domain.Entities;
+using InterviewTool.Domain.Repositories;
 using MediatR;
 using System;
 using System.Threading;
@@ -12,19 +14,37 @@ namespace InterviewTool.Application.CommandHandlers
         IRequestHandler<UpdateChapterResultCommand, ExecutionResult>,
         IRequestHandler<DeleteChapterResultCommand, ExecutionResult>
     {
-        public Task<ExecutionResult> Handle(CreateChapterResultCommand request, CancellationToken cancellationToken)
+        private readonly IUnitOfWork _uow;
+
+        public ChapterResultCommandHandler(IUnitOfWork uow)
         {
-            throw new NotImplementedException();
+            _uow = uow;
         }
 
-        public Task<ExecutionResult> Handle(UpdateChapterResultCommand request, CancellationToken cancellationToken)
+        public async Task<ExecutionResult> Handle(CreateChapterResultCommand request, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            var chapterResultToInsert = new ChapterResult(request.InterviewId, request.Point, request.ChapterId);
+            _uow.ChapterResultRepository.Insert(chapterResultToInsert);
+            var result = await _uow.SaveAsync();
+
+            return result > 0 ? ExecutionResult.FromSuccess() : ExecutionResult.FromFailure("Error saving chapter result");
         }
 
-        public Task<ExecutionResult> Handle(DeleteChapterResultCommand request, CancellationToken cancellationToken)
+        public async Task<ExecutionResult> Handle(UpdateChapterResultCommand request, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            var chapterResultToUpdate = await _uow.ChapterResultRepository.GetByIdAsync(request.ChapterResultId);
+            chapterResultToUpdate.UpdatePoint(request.Point);
+            var result = await _uow.SaveAsync();
+
+            return result > 0 ? ExecutionResult.FromSuccess() : ExecutionResult.FromFailure("Error updating chapter result");
+        }
+
+        public async Task<ExecutionResult> Handle(DeleteChapterResultCommand request, CancellationToken cancellationToken)
+        {
+            await _uow.ChapterResultRepository.DeleteByIdAsync(request.ChapterResultId);
+            var result = await _uow.SaveAsync();
+
+            return result > 0 ? ExecutionResult.FromSuccess() : ExecutionResult.FromFailure("Error deleting chapter result");
         }
     }
 }

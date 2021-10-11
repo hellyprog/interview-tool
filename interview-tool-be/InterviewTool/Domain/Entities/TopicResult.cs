@@ -3,7 +3,7 @@
     public class TopicResult
     {
         public int TopicResultId { get; set; }
-        public int Point { get; set; }
+        public double Point { get; set; }
         public int? TopicId { get; set; }
         public int ChapterResultId { get; set; }
         public Topic Topic { get; set; }
@@ -18,7 +18,7 @@
             TopicId = topicId;
         }
 
-        public void UpdatePoint(int point)
+        public void UpdatePoint(double point)
         {
             Point = point;
         }

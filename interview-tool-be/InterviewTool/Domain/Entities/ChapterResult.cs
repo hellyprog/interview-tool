@@ -21,7 +21,7 @@ namespace InterviewTool.Domain.Entities
             ChapterId = chapterId;
         }
 
-        public void UpdatePoint(int point)
+        public void UpdatePoint(double point)
         {
             Point = point;
         }
