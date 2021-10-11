@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace InterviewTool.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/topic-results")]
     [ApiController]
     public class TopicResultController : BaseApplicationController
     {

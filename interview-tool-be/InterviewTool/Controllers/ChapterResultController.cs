@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 
 namespace InterviewTool.Controllers
 {
+    [Route("api/chapter-results")]
+    [ApiController]
     public class ChapterResultController : BaseApplicationController
     {
         private readonly IMediator _mediator;
