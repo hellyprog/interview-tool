@@ -17,8 +17,8 @@ namespace InterviewTool.Controllers
             _mediator = mediator;
         }
 
-        [HttpGet]
-        public async Task<IActionResult> GetInterviewSuggestion([FromQuery] GetInterviewSuggestionQuery query)
+        [HttpGet("cv")]
+        public async Task<IActionResult> GetInterviewSuggestion([FromQuery] GetCvInterviewSuggestionQuery query)
         {
             var result = await _mediator.Send(query);
             var statusCode = result.Success ? StatusCodes.Status200OK : StatusCodes.Status400BadRequest;
