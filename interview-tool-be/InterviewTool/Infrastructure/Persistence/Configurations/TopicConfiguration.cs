@@ -20,6 +20,10 @@ namespace InterviewTool.Infrastructure.Persistence.Configurations
                 .WithMany(t => t.Topics)
                 .HasForeignKey(t => t.ChapterId);
 
+            builder.HasOne(t => t.Technology)
+                .WithMany(t => t.Topics)
+                .HasForeignKey(t => t.TechnologyId);
+
             builder.HasMany(x => x.TopicResults)
                 .WithOne(x => x.Topic)
                 .HasForeignKey(x => x.TopicId)
