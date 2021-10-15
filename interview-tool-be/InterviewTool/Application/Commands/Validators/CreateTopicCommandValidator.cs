@@ -7,6 +7,7 @@ namespace InterviewTool.Application.Commands.Validators
         public CreateTopicCommandValidator()
         {
             RuleFor(x => x.ChapterId).GreaterThan(0);
+            RuleFor(x => x.TechnologyId).GreaterThan(0);
             RuleFor(x => x.Name).NotNull().NotEmpty();
             RuleFor(x => x.Weight).GreaterThan(0);
         }

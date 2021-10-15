@@ -16,7 +16,11 @@ namespace InterviewTool.Infrastructure
                 b => b.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName)));
 
             services.AddTransient<IChapterRepository, ChapterRepository>();
+            services.AddTransient<IChapterResultRepository, ChapterResultRepository>();
+            services.AddTransient<IInterviewRepository, InterviewRepository>();
+            services.AddTransient<ITechnologyRepository, TechnologyRepository>();
             services.AddTransient<ITopicRepository, TopicRepository>();
+            services.AddTransient<ITopicResultRepository, TopicResultRepository>();
             services.AddTransient<IUnitOfWork, UnitOfWork>();
         }
     }

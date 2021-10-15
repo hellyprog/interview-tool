@@ -8,5 +8,6 @@ namespace InterviewTool.Application.Commands
         public string Name { get; set; }
         public double Weight { get; set; }
         public int ChapterId { get; set; }
+        public int TechnologyId { get; set; }
     }
 }

@@ -22,7 +22,7 @@ namespace InterviewTool.Application.CommandHandlers
 
         public async Task<ExecutionResult> Handle(CreateTopicCommand request, CancellationToken cancellationToken)
         {
-            var topicToInsert = new Topic(request.Name, request.Weight, request.ChapterId);
+            var topicToInsert = new Topic(request.Name, request.Weight, request.ChapterId, request.TechnologyId);
             _uow.TopicRepository.Insert(topicToInsert);
             var result = await _uow.SaveAsync();
 

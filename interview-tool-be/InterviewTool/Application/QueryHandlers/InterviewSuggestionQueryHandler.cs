@@ -2,6 +2,7 @@
 using InterviewTool.Application.Queries.InterviewSuggestion;
 using InterviewTool.Domain.Repositories;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -26,6 +27,14 @@ namespace InterviewTool.Application.QueryHandlers
         {
             using var reader = new StreamReader(request.File.OpenReadStream());
             var fileContent = await reader.ReadToEndAsync();
+
+            var technologies = await _unitOfWork.TechnologyRepository.GetAll().ToListAsync();
+            var technologyScore = new Dictionary<string, int>();
+
+            foreach (var item in technologies)
+            {
+
+            }
 
             return default;
         }

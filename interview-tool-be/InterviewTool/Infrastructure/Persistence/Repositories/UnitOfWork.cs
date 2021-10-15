@@ -31,13 +31,11 @@ namespace InterviewTool.Infrastructure.Persistence.Repositories
             }
         }
 
-        public ITopicRepository TopicRepository => _topicRepository ?? new TopicRepository(_context);
-
         public IChapterResultRepository ChapterResultRepository => _chapterResultRepository ?? new ChapterResultRepository(_context);
-
+        public ITopicRepository TopicRepository => _topicRepository ?? new TopicRepository(_context);
         public ITopicResultRepository TopicResultRepository => _topicResultRepository ?? new TopicResultRepository(_context);
-
         public IInterviewRepository InterviewRepository => _interviewRepository ?? new InterviewRepository(_context);
+        public ITechnologyRepository TechnologyRepository => throw new NotImplementedException();
 
         public Task<int> SaveAsync()
         {

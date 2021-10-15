@@ -16,6 +16,7 @@ namespace InterviewTool.Infrastructure.Persistence.Configurations
 
             builder.HasMany(t => t.Topics)
                 .WithOne(t => t.Technology)
+                .HasForeignKey(t => t.TechnologyId)
                 .OnDelete(DeleteBehavior.SetNull);
         }
     }
