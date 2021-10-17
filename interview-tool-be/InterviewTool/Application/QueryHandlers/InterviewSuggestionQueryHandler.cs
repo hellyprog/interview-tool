@@ -3,11 +3,9 @@ using InterviewTool.Application.Queries.InterviewSuggestion;
 using InterviewTool.Domain.Repositories;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -33,10 +31,14 @@ namespace InterviewTool.Application.QueryHandlers
 
             foreach (var item in technologies)
             {
-
+                if (fileContent.Contains(item.Name))
+                {
+                    var technologyCount = fileContent.Split(' ').Count(x => x == item.Name);
+                    technologyScore.Add(item.Name, 1);
+                }
             }
 
-            return default;
+            return ExecutionResult<string>.FromSuccess(technologyScore.OrderByDescending(x => x.Value).First().Key);
         }
     }
 }
