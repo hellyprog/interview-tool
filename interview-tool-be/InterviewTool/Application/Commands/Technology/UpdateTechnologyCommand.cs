@@ -1,7 +1,11 @@
-﻿namespace InterviewTool.Application.Commands.Technology
+﻿using InterviewTool.Application.Models;
+using MediatR;
+
+namespace InterviewTool.Application.Commands
 {
-    public class UpdateTechnologyCommand
+    public class UpdateTechnologyCommand : IRequest<ExecutionResult>
     {
+        public int TechnologyId { get; set; }
         public string TechnologyName { get; set; }
     }
 }
