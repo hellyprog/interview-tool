@@ -2,12 +2,12 @@
 {
     public class TopicResult
     {
-        public int TopicResultId { get; set; }
-        public double Point { get; set; }
-        public int? TopicId { get; set; }
-        public int ChapterResultId { get; set; }
-        public Topic Topic { get; set; }
-        public ChapterResult ChapterResult { get; set; }
+        public int TopicResultId { get; private set; }
+        public int Point { get; private set; }
+        public int? TopicId { get; private set; }
+        public int ChapterResultId { get; private set; }
+        public Topic Topic { get; private set; }
+        public ChapterResult ChapterResult { get; private set; }
 
         private TopicResult() { }
 
@@ -18,7 +18,7 @@
             TopicId = topicId;
         }
 
-        public void UpdatePoint(double point)
+        public void UpdatePoint(int point)
         {
             Point = point;
         }

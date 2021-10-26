@@ -1,7 +1,8 @@
 ﻿using InterviewTool.Application.Commands;
 using InterviewTool.Application.Models;
+using InterviewTool.Domain.Entities;
+using InterviewTool.Domain.Repositories;
 using MediatR;
-using System;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -12,19 +13,37 @@ namespace InterviewTool.Application.CommandHandlers
         IRequestHandler<UpdateTopicResultCommand, ExecutionResult>,
         IRequestHandler<DeleteTopicResultCommand, ExecutionResult>
     {
-        public Task<ExecutionResult> Handle(CreateTopicResultCommand request, CancellationToken cancellationToken)
+        private readonly IUnitOfWork _uow;
+
+        public TopicResultCommandHandler(IUnitOfWork uow)
         {
-            throw new NotImplementedException();
+            _uow = uow;
         }
 
-        public Task<ExecutionResult> Handle(UpdateTopicResultCommand request, CancellationToken cancellationToken)
+        public async Task<ExecutionResult> Handle(CreateTopicResultCommand request, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            var topicResultToInsert = new TopicResult(request.ChapterResultId, request.Point, request.TopicId);
+            _uow.TopicResultRepository.Insert(topicResultToInsert);
+            var result = await _uow.SaveAsync();
+
+            return result > 0 ? ExecutionResult.FromSuccess() : ExecutionResult.FromFailure("Error saving topic result");
         }
 
-        public Task<ExecutionResult> Handle(DeleteTopicResultCommand request, CancellationToken cancellationToken)
+        public async Task<ExecutionResult> Handle(UpdateTopicResultCommand request, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            var topicResultToUpdate = await _uow.TopicResultRepository.GetByIdAsync(request.TopicResultId);
+            topicResultToUpdate.UpdatePoint(request.Point);
+            var result = await _uow.SaveAsync();
+
+            return result > 0 ? ExecutionResult.FromSuccess() : ExecutionResult.FromFailure("Error updating topic result");
+        }
+
+        public async Task<ExecutionResult> Handle(DeleteTopicResultCommand request, CancellationToken cancellationToken)
+        {
+            await _uow.TopicResultRepository.DeleteByIdAsync(request.TopicResultId);
+            var result = await _uow.SaveAsync();
+
+            return result > 0 ? ExecutionResult.FromSuccess() : ExecutionResult.FromFailure("Error deleting topic result");
         }
     }
 }
