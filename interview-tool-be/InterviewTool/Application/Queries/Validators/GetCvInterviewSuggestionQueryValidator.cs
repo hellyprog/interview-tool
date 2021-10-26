@@ -1,5 +1,5 @@
 ﻿using FluentValidation;
-using InterviewTool.Application.Queries.InterviewSuggestion;
+using InterviewTool.Application.Queries;
 
 namespace InterviewTool.Application.Queries.Validators
 {

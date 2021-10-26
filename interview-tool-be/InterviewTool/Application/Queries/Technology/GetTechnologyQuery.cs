@@ -2,7 +2,7 @@
 using InterviewTool.Application.Models;
 using MediatR;
 
-namespace InterviewTool.Application.Queries.Technology
+namespace InterviewTool.Application.Queries
 {
     public class GetTechnologyQuery : IRequest<ExecutionResult<TechnologyDTO>>
     {

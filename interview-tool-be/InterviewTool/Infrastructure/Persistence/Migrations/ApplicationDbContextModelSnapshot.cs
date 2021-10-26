@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace InterviewTool.Migrations
+namespace InterviewTool.Infrastructure.Persistence.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     partial class ApplicationDbContextModelSnapshot : ModelSnapshot
@@ -155,8 +155,8 @@ namespace InterviewTool.Migrations
                         .HasColumnType("int")
                         .HasColumnName("chapter_result_id");
 
-                    b.Property<double>("Point")
-                        .HasColumnType("float")
+                    b.Property<int>("Point")
+                        .HasColumnType("int")
                         .HasColumnName("point");
 
                     b.Property<int?>("TopicId")

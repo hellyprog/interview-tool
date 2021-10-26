@@ -2,7 +2,7 @@
 using MediatR;
 using Microsoft.AspNetCore.Http;
 
-namespace InterviewTool.Application.Queries.InterviewSuggestion
+namespace InterviewTool.Application.Queries
 {
     public class GetCvInterviewSuggestionQuery : IRequest<ExecutionResult<string>>
     {

@@ -1,5 +1,5 @@
 ﻿using InterviewTool.Application.Models;
-using InterviewTool.Application.Queries.InterviewSuggestion;
+using InterviewTool.Application.Queries;
 using InterviewTool.Domain.Repositories;
 using MediatR;
 using Microsoft.EntityFrameworkCore;

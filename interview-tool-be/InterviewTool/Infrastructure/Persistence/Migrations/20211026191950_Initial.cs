@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace InterviewTool.Migrations
+namespace InterviewTool.Infrastructure.Persistence.Migrations
 {
     public partial class Initial : Migration
     {
@@ -108,7 +108,7 @@ namespace InterviewTool.Migrations
                 {
                     topic_result_id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    point = table.Column<double>(type: "float", nullable: false),
+                    point = table.Column<int>(type: "int", nullable: false),
                     topic_id = table.Column<int>(type: "int", nullable: true),
                     chapter_result_id = table.Column<int>(type: "int", nullable: false)
                 },

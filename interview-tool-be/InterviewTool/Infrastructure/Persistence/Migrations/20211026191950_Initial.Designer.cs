@@ -7,10 +7,10 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace InterviewTool.Migrations
+namespace InterviewTool.Infrastructure.Persistence.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20211015185405_Initial")]
+    [Migration("20211026191950_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -157,8 +157,8 @@ namespace InterviewTool.Migrations
                         .HasColumnType("int")
                         .HasColumnName("chapter_result_id");
 
-                    b.Property<double>("Point")
-                        .HasColumnType("float")
+                    b.Property<int>("Point")
+                        .HasColumnType("int")
                         .HasColumnName("point");
 
                     b.Property<int?>("TopicId")

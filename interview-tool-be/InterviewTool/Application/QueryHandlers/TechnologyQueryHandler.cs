@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using InterviewTool.Application.DTOs;
 using InterviewTool.Application.Models;
-using InterviewTool.Application.Queries.Technology;
+using InterviewTool.Application.Queries;
 using InterviewTool.Domain.Repositories;
 using MediatR;
 using Microsoft.EntityFrameworkCore;

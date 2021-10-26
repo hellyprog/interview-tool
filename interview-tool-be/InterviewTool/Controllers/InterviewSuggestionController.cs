@@ -1,4 +1,4 @@
-﻿using InterviewTool.Application.Queries.InterviewSuggestion;
+﻿using InterviewTool.Application.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
