@@ -5,6 +5,6 @@ namespace InterviewTool.Application.Commands
 {
     public class CreateTechnologyCommand : IRequest<ExecutionResult>
     {
-        public string TechnologyName { get; set; }
+        public string Name { get; set; }
     }
 }

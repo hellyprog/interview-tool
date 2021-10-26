@@ -6,7 +6,7 @@ namespace InterviewTool.Application.Commands.Validators
     {
         public CreateTechnologyCommandValidator()
         {
-            RuleFor(x => x.TechnologyName).NotNull().NotEmpty();
+            RuleFor(x => x.Name).NotNull().NotEmpty();
         }
     }
 }

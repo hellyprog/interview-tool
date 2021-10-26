@@ -1,5 +1,6 @@
 ﻿using InterviewTool.Application.Commands;
 using InterviewTool.Application.Models;
+using InterviewTool.Domain.Entities;
 using InterviewTool.Domain.Repositories;
 using MediatR;
 using System;
@@ -20,19 +21,30 @@ namespace InterviewTool.Application.CommandHandlers
             _uow = uow;
         }
 
-        public Task<ExecutionResult> Handle(CreateTechnologyCommand request, CancellationToken cancellationToken)
+        public async Task<ExecutionResult> Handle(CreateTechnologyCommand request, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            var technologyToInsert = new Technology(request.Name);
+            _uow.TechnologyRepository.Insert(technologyToInsert);
+            var result = await _uow.SaveAsync();
+
+            return result > 0 ? ExecutionResult.FromSuccess() : ExecutionResult.FromFailure("Error saving technology");
         }
 
-        public Task<ExecutionResult> Handle(UpdateTechnologyCommand request, CancellationToken cancellationToken)
+        public async Task<ExecutionResult> Handle(UpdateTechnologyCommand request, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            var technologyToUpdate = await _uow.TechnologyRepository.GetByIdAsync(request.TechnologyId);
+            technologyToUpdate.UpdateName(request.Name);
+            var result = await _uow.SaveAsync();
+
+            return result > 0 ? ExecutionResult.FromSuccess() : ExecutionResult.FromFailure("Error updating technology");
         }
 
-        public Task<ExecutionResult> Handle(DeleteTechnologyCommand request, CancellationToken cancellationToken)
+        public async Task<ExecutionResult> Handle(DeleteTechnologyCommand request, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            await _uow.TechnologyRepository.DeleteByIdAsync(request.TechnologyId);
+            var result = await _uow.SaveAsync();
+
+            return result > 0 ? ExecutionResult.FromSuccess() : ExecutionResult.FromFailure("Error deleting technology");
         }
     }
 }

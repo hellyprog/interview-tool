@@ -7,7 +7,7 @@ namespace InterviewTool.Application.Commands.Validators
         public UpdateTechnologyCommandValidator()
         {
             RuleFor(x => x.TechnologyId).GreaterThan(0);
-            RuleFor(x => x.TechnologyName).NotNull().NotEmpty();
+            RuleFor(x => x.Name).NotNull().NotEmpty();
         }
     }
 }
