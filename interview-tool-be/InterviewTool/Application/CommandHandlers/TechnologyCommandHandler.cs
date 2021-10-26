@@ -3,7 +3,6 @@ using InterviewTool.Application.Models;
 using InterviewTool.Domain.Entities;
 using InterviewTool.Domain.Repositories;
 using MediatR;
-using System;
 using System.Threading;
 using System.Threading.Tasks;
 

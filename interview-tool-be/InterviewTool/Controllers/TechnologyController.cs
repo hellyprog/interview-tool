@@ -3,14 +3,11 @@ using InterviewTool.Application.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace InterviewTool.Controllers
 {
-    [Route("api/interviews")]
+    [Route("api/technologies")]
     [ApiController]
     public class TechnologyController : BaseApplicationController
     {

@@ -12,6 +12,7 @@ namespace InterviewTool.Infrastructure.Persistence.Repositories
         private readonly IChapterResultRepository _chapterResultRepository;
         private readonly ITopicResultRepository _topicResultRepository;
         private readonly IInterviewRepository _interviewRepository;
+        private readonly ITechnologyRepository _technologyRepository;
 
         public UnitOfWork(ApplicationDbContext context)
         {
@@ -35,7 +36,7 @@ namespace InterviewTool.Infrastructure.Persistence.Repositories
         public ITopicRepository TopicRepository => _topicRepository ?? new TopicRepository(_context);
         public ITopicResultRepository TopicResultRepository => _topicResultRepository ?? new TopicResultRepository(_context);
         public IInterviewRepository InterviewRepository => _interviewRepository ?? new InterviewRepository(_context);
-        public ITechnologyRepository TechnologyRepository => throw new NotImplementedException();
+        public ITechnologyRepository TechnologyRepository => _technologyRepository ?? new TechnologyRepository(_context);
 
         public Task<int> SaveAsync()
         {
