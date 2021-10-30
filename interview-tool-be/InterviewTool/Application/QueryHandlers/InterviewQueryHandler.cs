@@ -6,6 +6,7 @@ using InterviewTool.Domain.Repositories;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -14,7 +15,8 @@ namespace InterviewTool.Application.QueryHandlers
 {
     public class InterviewQueryHandler :
         IRequestHandler<GetInterviewQuery, ExecutionResult<InterviewDTO>>,
-        IRequestHandler<GetInterviewsQuery, ExecutionResult<List<InterviewDTO>>>
+        IRequestHandler<GetInterviewsQuery, ExecutionResult<List<InterviewDTO>>>,
+        IRequestHandler<GetCvInterviewSuggestionQuery, ExecutionResult<TechnologyDTO>>
     {
         private readonly IUnitOfWork _uow;
         private readonly IMapper _mapper;
@@ -41,6 +43,26 @@ namespace InterviewTool.Application.QueryHandlers
                 .ToListAsync(cancellationToken: cancellationToken);
 
             return ExecutionResult<List<InterviewDTO>>.FromSuccess(_mapper.Map<List<InterviewDTO>>(interviews));
+        }
+
+        public async Task<ExecutionResult<TechnologyDTO>> Handle(GetCvInterviewSuggestionQuery request, CancellationToken cancellationToken)
+        {
+            using var reader = new StreamReader(request.File.OpenReadStream());
+            var fileContent = await reader.ReadToEndAsync();
+
+            var technologies = await _uow.TechnologyRepository.GetAll().ToListAsync(cancellationToken: cancellationToken);
+            var technologyScore = new Dictionary<TechnologyDTO, int>();
+
+            foreach (var item in technologies)
+            {
+                if (fileContent.Contains(item.Name))
+                {
+                    var technologyCount = fileContent.Split(' ').Count(x => x == item.Name);
+                    technologyScore.Add(new TechnologyDTO { TechnologyId = item.TechnologyId, TechnologyName = item.Name }, 1);
+                }
+            }
+
+            return ExecutionResult<TechnologyDTO>.FromSuccess(technologyScore.OrderByDescending(x => x.Value).First().Key);
         }
     }
 }

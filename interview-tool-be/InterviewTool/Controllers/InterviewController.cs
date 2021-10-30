@@ -71,5 +71,11 @@ namespace InterviewTool.Controllers
 
             return StatusCode(statusCode, result);
         }
+
+        [HttpGet("technology/{technology}")]
+        public async Task<IActionResult> GetInterviewQuestionsByTechnology(string technology)
+        {
+            return default;
+        }
     }
 }
