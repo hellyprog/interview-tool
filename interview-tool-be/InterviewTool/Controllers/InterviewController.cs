@@ -62,5 +62,14 @@ namespace InterviewTool.Controllers
 
             return StatusCode(statusCode, result);
         }
+
+        [HttpPost("cv-suggestion")]
+        public async Task<IActionResult> GetInterviewSuggestion([FromForm] GetCvInterviewSuggestionQuery query)
+        {
+            var result = await _mediator.Send(query);
+            var statusCode = result.Success ? StatusCodes.Status200OK : StatusCodes.Status400BadRequest;
+
+            return StatusCode(statusCode, result);
+        }
     }
 }

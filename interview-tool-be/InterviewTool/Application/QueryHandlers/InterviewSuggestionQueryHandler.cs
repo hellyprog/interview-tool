@@ -26,7 +26,7 @@ namespace InterviewTool.Application.QueryHandlers
             using var reader = new StreamReader(request.File.OpenReadStream());
             var fileContent = await reader.ReadToEndAsync();
 
-            var technologies = await _unitOfWork.TechnologyRepository.GetAll().ToListAsync();
+            var technologies = await _unitOfWork.TechnologyRepository.GetAll().ToListAsync(cancellationToken: cancellationToken);
             var technologyScore = new Dictionary<string, int>();
 
             foreach (var item in technologies)
