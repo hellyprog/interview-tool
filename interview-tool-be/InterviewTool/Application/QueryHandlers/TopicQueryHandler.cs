@@ -27,6 +27,7 @@ namespace InterviewTool.Application.QueryHandlers
         public async Task<ExecutionResult<List<TopicDTO>>> Handle(GetTopicsQuery request, CancellationToken cancellationToken)
         {
             var topics = await _uow.TopicRepository.GetAll()
+                .Include(x => x.Technology)
                 .Where(x => x.ChapterId == request.ChapterId)
                 .ToListAsync(cancellationToken: cancellationToken);
 

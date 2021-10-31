@@ -29,7 +29,11 @@ namespace InterviewTool.Application.QueryHandlers
 
         public async Task<ExecutionResult<InterviewDTO>> Handle(GetInterviewQuery request, CancellationToken cancellationToken)
         {
-            var interview = await _uow.InterviewRepository.GetByIdAsync(request.InterviewId);
+            var interview = await _uow.InterviewRepository.GetAll()
+                .Where(x => x.InterviewId == request.InterviewId)
+                .Include(x => x.ChapterResults)
+                    .ThenInclude(cr => cr.TopicResults)
+                .FirstOrDefaultAsync();
 
             return interview != null
                 ? ExecutionResult<InterviewDTO>.FromSuccess(_mapper.Map<InterviewDTO>(interview))

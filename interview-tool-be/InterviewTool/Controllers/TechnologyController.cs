@@ -27,15 +27,6 @@ namespace InterviewTool.Controllers
             return StatusCode(statusCode, result);
         }
 
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetTechnology(int technologyId)
-        {
-            var result = await _mediator.Send(new GetTechnologyQuery { TechnologyId = technologyId });
-            var statusCode = result.Success ? StatusCodes.Status200OK : StatusCodes.Status400BadRequest;
-
-            return StatusCode(statusCode, result);
-        }
-
         [HttpPost]
         public async Task<IActionResult> CreateTechnology([FromBody] CreateTechnologyCommand command)
         {
