@@ -7,6 +7,5 @@ namespace InterviewTool.Application.DTOs
         public int ChapterId { get; set; }
         public string Name { get; set; }
         public double Weight { get; set; }
-        public List<TopicDTO> Topics { get; set; }
     }
 }
